@@ -20,36 +20,38 @@ fn impl_liststore_item(ast: &DeriveInput) -> TokenStream {
     let field_type = fields.iter().map(|field| &field.ty);
     let field_number = 0..fields.len() as i32;
     let from = quote! {
-            fn from_list_store(list_store: gtk::ListStore, tp: &gtk::TreePath) -> Option<Self> {
-                list_store.get_iter(tp).and_then(|iter| {
-                    Some(#name {
-                        #(
-                            #field_name: list_store.get_value(&iter, #field_number).get::<#field_type>().unwrap()?
-                        ),*
-                    })
-                })
-            }
-        };
+        fn from_liststore_iter<S>(list_store: S, iter: &gtk::TreeIter) -> Option<Self>
+            where S: TreeModelExt
+        {
+            Some(#name {
+                #(
+                    #field_name: list_store.get_value(iter, #field_number).get::<#field_type>().ok()??
+                ),*
+            })
+        }
+    };
 
     let field_name = fields.iter().map(|field| &field.ident);
     let field_count = fields.len();
     let insert = quote! {
-            fn insert_to_list_store(&self, list_store: gtk::ListStore) -> gtk::TreeIter {
-                let mut array: [u32; #field_count] = [0; #field_count];
-                for i in 0..array.len() {
-                    array[i] = i as u32;
-                }
-                list_store.insert_with_values(
-                    None,
-                    &array,
-                    &[
-                        #(
-                            &self.#field_name
-                        ),*
-                    ],
-                )
+        fn insert_into_liststore<S>(&self, list_store: S) -> gtk::TreeIter
+            where S: GtkListStoreExtManual
+        {
+            let mut array: [u32; #field_count] = [0; #field_count];
+            for i in 0..array.len() {
+                array[i] = i as u32;
             }
-        };
+            list_store.insert_with_values(
+                None,
+                &array,
+                &[
+                    #(
+                        &self.#field_name
+                    ),*
+                ],
+            )
+        }
+    };
 
     let gen = quote! {
         impl gtk_liststore_item::ListStoreItem for #name {
