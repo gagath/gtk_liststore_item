@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "gtk_liststore_item",
+    "gtk_liststore_item_derive",
+]
