@@ -4,7 +4,7 @@
 [![Documentation](https://docs.rs/gtk_liststore_item/badge.svg)](https://docs.rs/gtk_liststore_item)
 [![License](https://img.shields.io/crates/l/gtk_liststore_item.svg)](https://crates.io/crates/gtk_liststore_item)
 
-Automatic gtk::ListStore struct derive for Rust.
+Automatic `gtk::ListStore` struct derive for Rust.
 
 ## Usage
 
@@ -18,7 +18,7 @@ gtk_liststore_item = "0.1.0"
 
 ## Example
 
-After the crate is installed, you can enjoy the ListStoreItem derive!
+After the crate is installed, you can enjoy the `ListStoreItem` derive!
 
 ```rust
 #[derive(ListStoreItem)]
