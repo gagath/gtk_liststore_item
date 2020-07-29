@@ -1,6 +1,6 @@
 [package]
 name = "gtk_liststore_item_derive"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Romain Porte <microjoe@microjoe.org>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
