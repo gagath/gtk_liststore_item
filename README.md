@@ -39,7 +39,7 @@ Without this crate, you would have to manually serialize each of the entries in
 your struct with their type:
 
 ```rust
-fn get_item(liststore: gtk::ListStore) {
+fn get_item(liststore: gtk::ListStore, iter: &gtk::TreeIter) {
     Some(Item {
         name: list_store.get_value(&iter, 0).get::<String>().ok()??,
         value: list_store.get_value(&iter, 1).get::<u32>().ok()??,
