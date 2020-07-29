@@ -3,6 +3,12 @@ name = "gtk_liststore_item"
 version = "0.1.0"
 authors = ["Romain Porte <microjoe@microjoe.org>"]
 edition = "2018"
+license = "MIT OR Apache-2.0"
+description = "Automatic gtk::ListStore struct derive for Rust."
+readme = "README.md"
+keywords = ["gui", "gtk", "gtk-rs", "gnome", "glade"]
+categories = ["gui"]
+repository = "https://github.com/MicroJoe/gtk_liststore_item"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -11,10 +17,10 @@ gtk = "0.9.*"
 gtk_liststore_item_derive = { version = "0.1.0", optional = true, path = "../gtk_liststore_item_derive" }
 
 [dev-dependencies]
-gladis = "0.2.*"
-gladis_proc_macro = "0.2.*"
-gtk_liststore_item_derive = { version = "0.1.*", path = "../gtk_liststore_item_derive" }
+gladis = "0.2.1"
+gladis_proc_macro = "0.2.1"
+gtk_liststore_item_derive = { version = "0.1.0", path = "../gtk_liststore_item_derive" }
 
 [features]
-default = []
+default = ["derive"]
 derive = ["gtk_liststore_item_derive"]

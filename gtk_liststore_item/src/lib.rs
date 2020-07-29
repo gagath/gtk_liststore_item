@@ -94,6 +94,8 @@ use gtk::prelude::*;
 ///         })
 ///     }
 ///
+///     // from_liststore_path is already implemented to call from_liststore_iter
+///
 ///     fn insert_into_liststore<S>(&self, list_store: S) -> gtk::TreeIter
 ///         where S: GtkListStoreExtManual
 ///     {
@@ -129,3 +131,8 @@ pub trait ListStoreItem {
     where
         S: GtkListStoreExtManual;
 }
+
+// Re-export #[derive(ListStoreItem)].
+#[cfg(feature = "derive")]
+#[doc(hidden)]
+pub use gtk_liststore_item_derive::ListStoreItem;
