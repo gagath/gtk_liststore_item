@@ -16,7 +16,9 @@ your project's `Cargo.toml` file:
 gtk_liststore_item = "0.1.0"
 ```
 
-After this is done, you can enjoy the ListStoreItem derive!
+## Example
+
+After the crate is installed, you can enjoy the ListStoreItem derive!
 
 ```rust
 #[derive(ListStoreItem)]
