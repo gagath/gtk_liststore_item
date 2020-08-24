@@ -17,8 +17,7 @@ gtk = "0.9.*"
 gtk_liststore_item_derive = { version = "0.1.0", optional = true, path = "../gtk_liststore_item_derive" }
 
 [dev-dependencies]
-gladis = "0.2.1"
-gladis_proc_macro = "0.2.1"
+gladis = "0.4.1"
 gtk_liststore_item_derive = { version = "0.1.0", path = "../gtk_liststore_item_derive" }
 
 [features]
