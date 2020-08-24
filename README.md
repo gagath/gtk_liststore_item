@@ -30,7 +30,8 @@ struct Item {
 fn main() {
     gtk::init().unwrap();
 
-    let list_store = ...; // Depends if you are using Glade or code for your UI
+    // Depends if you are using Glade or code for your UI
+    let list_store = ...;
 
     let item = Item { name: "foobar".into(), value: 42 };
     item.insert_into_liststore(list_store);
