@@ -6,9 +6,7 @@
 //! use gtk::prelude::*;
 //!
 //! use gladis::Gladis;
-//! use gladis_proc_macro::Gladis;
 //! use gtk_liststore_item::ListStoreItem;
-//! use gtk_liststore_item_derive::ListStoreItem;
 //!
 //! const GLADE_SRC: &str = r#"
 //! <?xml version="1.0" encoding="UTF-8"?>
@@ -40,7 +38,7 @@
 //! fn main() {
 //!     gtk::init().unwrap();
 //!
-//!     let glade = Glade::from_string(GLADE_SRC);
+//!     let glade = Glade::from_string(GLADE_SRC).unwrap();
 //!
 //!     let item = Item { name: "foobar".into(), value: 42 };
 //!     item.insert_into_liststore(glade.list_store);
@@ -65,7 +63,6 @@ use gtk::prelude::*;
 /// ```
 /// use gtk::prelude::*;
 /// use gtk_liststore_item::ListStoreItem;
-/// use gtk_liststore_item_derive::ListStoreItem;
 ///
 /// #[derive(ListStoreItem)]
 /// struct Item {
