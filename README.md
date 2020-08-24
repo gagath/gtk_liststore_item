@@ -33,12 +33,12 @@ fn main() {
     let list_store = ...; // Depends if you are using Glade or code for your UI
 
     let item = Item { name: "foobar".into(), value: 42 };
-    item.insert_into_liststore(glade.list_store);
+    item.insert_into_liststore(list_store);
 }
 ```
 
 Without this crate, you would have to manually serialize each of the entries in
-your struct with their type:
+your struct with their type and position:
 
 ```rust
 fn get_item(liststore: gtk::ListStore, iter: &gtk::TreeIter) {
