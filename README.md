@@ -22,6 +22,32 @@ gtk_liststore_item = "1.0.0"
 After the crate is installed, you can enjoy the `ListStoreItem` derive!
 
 ```rust
+use gtk::prelude::*;
+
+use gladis::Gladis;
+use gtk_liststore_item::ListStoreItem;
+
+const GLADE_SRC: &str = r#"
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.2 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkListStore" id="list_store">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="guint"/>
+    </columns>
+  </object>
+</interface>
+"#;
+
+#[derive(Gladis)]
+struct Glade {
+    list_store: gtk::ListStore,
+}
+
 #[derive(ListStoreItem)]
 struct Item {
     name: String,
@@ -31,8 +57,7 @@ struct Item {
 fn main() {
     gtk::init().unwrap();
 
-    // Depends if you are using Glade or code for your UI
-    let list_store = ...;
+    let mut glade = Glade::from_string(GLADE_SRC).unwrap();
 
     let item = Item { name: "foobar".into(), value: 42 };
     let iter = item.insert_into_liststore(&mut glade.list_store);
@@ -47,7 +72,7 @@ Without this crate, you would have to manually serialize each of the entries in
 your struct with their type and position:
 
 ```rust
-fn get_item(liststore: &gtk::ListStore, iter: &gtk::TreeIter) {
+fn get_item(liststore: &gtk::ListStore, iter: &gtk::TreeIter) -> Item {
     Some(Item {
         name: list_store.value(&iter, 0).get::<String>().ok()?,
         value: list_store.value(&iter, 1).get::<u32>().ok()?,
@@ -57,7 +82,11 @@ fn get_item(liststore: &gtk::ListStore, iter: &gtk::TreeIter) {
 fn insert_item(item: &Item, list_store: &mut gtk::ListStore) -> gtk::TreeIter {
     list_store.insert_with_values(
         None,
-        &[(0, &self.name), (1, &self.value)])
+        &[
+            (0, &self.name),
+            (1, &self.value)
+        ]
+    )
 }
 ```
 
