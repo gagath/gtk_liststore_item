@@ -38,10 +38,14 @@
 //! fn main() {
 //!     gtk::init().unwrap();
 //!
-//!     let glade = Glade::from_string(GLADE_SRC).unwrap();
+//!     let mut glade = Glade::from_string(GLADE_SRC).unwrap();
 //!
 //!     let item = Item { name: "foobar".into(), value: 42 };
-//!     item.insert_into_liststore(glade.list_store);
+//!     let iter = item.insert_into_liststore(&mut glade.list_store);
+//!
+//!     let retrieved_item = Item::from_liststore_iter(&glade.list_store, &iter).unwrap();
+//!     assert_eq!("foobar", retrieved_item.name);
+//!     assert_eq!(42, retrieved_item.value);
 //! }
 //! ```
 
@@ -82,29 +86,28 @@ use gtk::prelude::*;
 /// }
 ///
 /// impl ListStoreItem for Item {
-///     fn from_liststore_iter<S>(list_store: S, iter: &gtk::TreeIter) -> Option<Self>
+///     fn from_liststore_iter<S>(list_store: &S, iter: &gtk::TreeIter) -> Option<Self>
 ///         where S: TreeModelExt
 ///     {
 ///         Some(Item {
-///             name: list_store.get_value(&iter, 0).get::<String>().ok()??,
-///             value: list_store.get_value(&iter, 1).get::<u32>().ok()??,
+///             name: list_store.value(&iter, 0).get::<String>().ok()?,
+///             value: list_store.value(&iter, 1).get::<u32>().ok()?,
 ///         })
 ///     }
 ///
 ///     // from_liststore_path is already implemented to call from_liststore_iter
 ///
-///     fn insert_into_liststore<S>(&self, list_store: S) -> gtk::TreeIter
+///     fn insert_into_liststore<S>(&self, list_store: &mut S) -> gtk::TreeIter
 ///         where S: GtkListStoreExtManual
 ///     {
 ///         list_store.insert_with_values(
 ///             None,
-///             &[0, 1],
-///             &[&self.name, &self.value])
+///             &[(0, &self.name), (1, &self.value)])
 ///     }
 /// }
 /// ```
 pub trait ListStoreItem {
-    fn from_liststore_iter<S>(list_store: S, iter: &gtk::TreeIter) -> Option<Self>
+    fn from_liststore_iter<S>(list_store: &S, iter: &gtk::TreeIter) -> Option<Self>
     where
         S: TreeModelExt,
         Self: std::marker::Sized;
@@ -113,18 +116,18 @@ pub trait ListStoreItem {
     ///
     /// The `ListStore` is where the data is stored, and the `TreePath` is a pointer to the
     /// location of the data in the table.
-    fn from_liststore_path<S>(list_store: S, tp: &gtk::TreePath) -> Option<Self>
+    fn from_liststore_path<S>(list_store: &S, tp: &gtk::TreePath) -> Option<Self>
     where
         S: TreeModelExt,
         Self: std::marker::Sized,
     {
         list_store
-            .get_iter(tp)
+            .iter(tp)
             .and_then(|iter| ListStoreItem::from_liststore_iter(list_store, &iter))
     }
 
     /// Instert an item into a `ListStore` as a new entry.
-    fn insert_into_liststore<S>(&self, list_store: S) -> gtk::TreeIter
+    fn insert_into_liststore<S>(&self, list_store: &mut S) -> gtk::TreeIter
     where
         S: GtkListStoreExtManual;
 }

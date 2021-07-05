@@ -34,7 +34,11 @@ fn main() {
     let list_store = ...;
 
     let item = Item { name: "foobar".into(), value: 42 };
-    item.insert_into_liststore(list_store);
+    let iter = item.insert_into_liststore(&mut glade.list_store);
+
+    let retrieved_item = Item::from_liststore_iter(&glade.list_store, &iter).unwrap();
+    assert_eq!("foobar", retrieved_item.name);
+    assert_eq!(42, retrieved_item.value);
 }
 ```
 
@@ -42,18 +46,17 @@ Without this crate, you would have to manually serialize each of the entries in
 your struct with their type and position:
 
 ```rust
-fn get_item(liststore: gtk::ListStore, iter: &gtk::TreeIter) {
+fn get_item(liststore: &gtk::ListStore, iter: &gtk::TreeIter) {
     Some(Item {
-        name: list_store.get_value(&iter, 0).get::<String>().ok()??,
-        value: list_store.get_value(&iter, 1).get::<u32>().ok()??,
+        name: list_store.value(&iter, 0).get::<String>().ok()?,
+        value: list_store.value(&iter, 1).get::<u32>().ok()?,
     })
 }
 
-fn insert_item(item: &Item, list_store: gtk::ListStore) -> gtk::TreeIter {
+fn insert_item(item: &Item, list_store: &mut gtk::ListStore) -> gtk::TreeIter {
     list_store.insert_with_values(
         None,
-        &[0, 1],
-        &[&self.name, &self.value])
+        &[(0, &self.name), (1, &self.value)])
 }
 ```
 
