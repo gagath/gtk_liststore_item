@@ -7,8 +7,6 @@
 
 Automatic `gtk::ListStore` struct derive for Rust.
 
-![Example screenshot with a table containing multiple entries](docs/gtk_liststore_example_simple.png)
-
 ## Usage
 
 In order to use this crate, you have to add the following dependencies into
@@ -23,52 +21,35 @@ gtk_liststore_item = "1.0.1"
 
 After the crate is installed, you can enjoy the `ListStoreItem` derive!
 
+By defining the following structure:
+
 ```rust
-use gtk::prelude::*;
-
-use gladis::Gladis;
-use gtk_liststore_item::ListStoreItem;
-
-const GLADE_SRC: &str = r#"
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
-<interface>
-  <requires lib="gtk+" version="3.20"/>
-  <object class="GtkListStore" id="list_store">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-      <!-- column-name value -->
-      <column type="guint"/>
-    </columns>
-  </object>
-</interface>
-"#;
-
-#[derive(Gladis)]
-struct Glade {
-    list_store: gtk::ListStore,
-}
-
 #[derive(ListStoreItem)]
 struct Item {
     name: String,
     value: u32,
-}
-
-fn main() {
-    gtk::init().unwrap();
-
-    let mut glade = Glade::from_string(GLADE_SRC).unwrap();
-
-    let item = Item { name: "foobar".into(), value: 42 };
-    let iter = item.insert_into_liststore(&mut glade.list_store);
-
-    let retrieved_item = Item::from_liststore_iter(&glade.list_store, &iter).unwrap();
-    assert_eq!("foobar", retrieved_item.name);
-    assert_eq!(42, retrieved_item.value);
+    progress: u32,
+    is_cool: bool,
 }
 ```
+
+You can directly add items to the ListStore model:
+
+```rust
+for i in 0..10 {
+    let item = Item {
+        name: format!("foobar{}", i),
+        value: rand::random(),
+        progress: rand::random::<u32>() % 100,
+        is_cool: rand::random()
+    };
+    item.insert_into_liststore(&mut ui.list_store);
+}
+```
+
+And directly see the result inside a `GtkTreeView` widget:
+
+![Example screenshot with a table containing multiple entries](docs/gtk_liststore_example_simple.png)
 
 Without this crate, you would have to manually serialize each of the entries in
 your struct with their type and position:
@@ -78,6 +59,8 @@ fn get_item(liststore: &gtk::ListStore, iter: &gtk::TreeIter) -> Item {
     Some(Item {
         name: list_store.value(&iter, 0).get::<String>().ok()?,
         value: list_store.value(&iter, 1).get::<u32>().ok()?,
+        progress: list_store.value(&iter, 2).get::<u32>().ok()?,
+        is_cool: list_store.value(&iter, 3).get::<bool>().ok()?,
     })
 }
 
@@ -86,13 +69,15 @@ fn insert_item(item: &Item, list_store: &mut gtk::ListStore) -> gtk::TreeIter {
         None,
         &[
             (0, &self.name),
-            (1, &self.value)
+            (1, &self.value),
+            (2, &self.progress),
+            (3, &self.is_cool)
         ]
     )
 }
 ```
 
-This can become pretty boring, hence this crate to ease the process.
+This can become pretty tedious, hence this crate to ease the process.
 
 ## License
 
