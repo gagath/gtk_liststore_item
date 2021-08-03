@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
  - Add a simple example.
 
+### Removed
+ - Removed Rust 1.51 support because of failing CI.
+
 ## [1.0.1] - 2021-07-05
 ### Changed
  - Fixed wrong suggested version in README.
