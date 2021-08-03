@@ -7,6 +7,8 @@
 
 Automatic `gtk::ListStore` struct derive for Rust.
 
+![Example screenshot with a table containing multiple entries](docs/gtk_liststore_example_simple.png)
+
 ## Usage
 
 In order to use this crate, you have to add the following dependencies into
