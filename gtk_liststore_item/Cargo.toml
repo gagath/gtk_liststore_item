@@ -19,6 +19,8 @@ gtk_liststore_item_derive = { version = "1.0.1", optional = true, path = "../gtk
 [dev-dependencies]
 gladis = "1.0.0"
 gtk_liststore_item_derive = { version = "1.0.1", path = "../gtk_liststore_item_derive" }
+gio = "0.14.*"
+rand = "0.8"
 
 [features]
 default = ["derive"]
