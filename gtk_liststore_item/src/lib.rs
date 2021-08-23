@@ -13,18 +13,16 @@
 //!     value: u32,
 //! }
 //!
-//! fn main() {
-//!     gtk::init().unwrap();
+//! gtk::init().unwrap();
 //!
-//!     let mut list_store = Item::new_liststore();
+//! let mut list_store = Item::new_liststore();
 //!
-//!     let item = Item { name: "foobar".into(), value: 42 };
-//!     let iter = item.insert_into_liststore(&mut list_store);
+//! let item = Item { name: "foobar".into(), value: 42 };
+//! let iter = item.insert_into_liststore(&mut list_store);
 //!
-//!     let retrieved_item = Item::from_liststore_iter(&list_store, &iter).unwrap();
-//!     assert_eq!("foobar", retrieved_item.name);
-//!     assert_eq!(42, retrieved_item.value);
-//! }
+//! let retrieved_item = Item::from_liststore_iter(&list_store, &iter).unwrap();
+//! assert_eq!("foobar", retrieved_item.name);
+//! assert_eq!(42, retrieved_item.value);
 //! ```
 
 use gtk::prelude::*;
