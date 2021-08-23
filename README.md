@@ -33,9 +33,11 @@ struct Item {
 }
 ```
 
-You can directly add items to the ListStore model:
+You can directly create and add items to the `gtk::ListStore` model:
 
 ```rust
+let mut list_store: gtk::ListStore = Item::new_liststore();
+
 for i in 0..10 {
     let item = Item {
         name: format!("foobar{}", i),
@@ -43,7 +45,7 @@ for i in 0..10 {
         progress: rand::random::<u32>() % 100,
         is_cool: rand::random(),
     };
-    item.insert_into_liststore(&mut ui.list_store);
+    item.insert_into_liststore(&mut list_store);
 }
 ```
 
@@ -55,6 +57,15 @@ Without this crate, you would have to manually serialize each of the entries in
 your struct with their type and position:
 
 ```rust
+fn new_liststore() -> gtk::ListStore {
+    gtk::ListStore::new(&[
+        String::static_type(),
+        u32::static_type(),
+        u32::static_type(),
+        bool::static_type(),
+    ])
+}
+
 fn get_item(liststore: &gtk::ListStore, iter: &gtk::TreeIter) -> Item {
     Some(Item {
         name: list_store.value(&iter, 0).get::<String>().ok()?,
