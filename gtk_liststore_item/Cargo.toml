@@ -23,6 +23,10 @@ gtk_liststore_item_derive = { version = "1.0.2", path = "../gtk_liststore_item_d
 gio = "0.14.*"
 rand = "0.8"
 
+# Relm example
+relm = "^0.22.0"
+relm-derive = "^0.22.0"
+
 [features]
 default = ["derive"]
 derive = ["gtk_liststore_item_derive"]
