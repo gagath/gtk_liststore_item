@@ -52,10 +52,22 @@ fn impl_liststore_item(ast: &DeriveInput) -> TokenStream {
         }
     };
 
+    let field_type = fields.iter().map(|field| &field.ty);
+    let new_liststore = quote! {
+        fn new_liststore() -> gtk::ListStore {
+            gtk::ListStore::new(
+                &[#(
+                    #field_type::static_type()),*
+                ]
+            )
+        }
+    };
+
     let gen = quote! {
         impl gtk_liststore_item::ListStoreItem for #name {
             #from
             #insert
+            #new_liststore
         }
     };
     gen.into()

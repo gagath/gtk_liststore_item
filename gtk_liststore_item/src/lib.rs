@@ -104,6 +104,10 @@ use gtk::prelude::*;
 ///             None,
 ///             &[(0, &self.name), (1, &self.value)])
 ///     }
+///
+///     fn new_liststore() -> gtk::ListStore {
+///         gtk::ListStore::new(&[String::static_type(), u32::static_type()])
+///     }
 /// }
 /// ```
 pub trait ListStoreItem {
@@ -134,6 +138,9 @@ pub trait ListStoreItem {
     fn insert_into_liststore<S>(&self, list_store: &mut S) -> gtk::TreeIter
     where
         S: GtkListStoreExtManual;
+
+    /// Create a new ListStore with appropriate fields
+    fn new_liststore() -> gtk::ListStore;
 }
 
 // Re-export #[derive(ListStoreItem)].

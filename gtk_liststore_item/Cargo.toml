@@ -14,6 +14,7 @@ repository = "https://github.com/MicroJoe/gtk_liststore_item"
 
 [dependencies]
 gtk = "0.14.*"
+glib = "0.14.*"
 gtk_liststore_item_derive = { version = "1.0.2", optional = true, path = "../gtk_liststore_item_derive" }
 
 [dev-dependencies]
