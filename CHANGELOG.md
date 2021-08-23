@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - New ListStoreItem::new_liststore() method (and autoderive).
  - New example relm_treeview.
 
-## Changed
+### Changed
  - Documentation now uses new_liststore() instead of Gladis derive.
 
 ## [1.0.2] - 2021-08-03
