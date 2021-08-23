@@ -28,7 +28,7 @@ fn build_ui(app: &gtk::Application) {
             name: format!("foobar{}", i),
             value: rand::random(),
             progress: rand::random::<u32>() % 100,
-            is_cool: rand::random()
+            is_cool: rand::random(),
         };
         item.insert_into_liststore(&mut ui.list_store);
     }
