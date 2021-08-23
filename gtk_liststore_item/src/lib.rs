@@ -107,6 +107,10 @@ use gtk::prelude::*;
 /// }
 /// ```
 pub trait ListStoreItem {
+    /// Construct an item from a `ListStore` and a `TreeIter`
+    ///
+    /// The `ListStore` is where the data is stored, and the `TreeIter` is a pointer to the
+    /// location of the data in the table.
     fn from_liststore_iter<S>(list_store: &S, iter: &gtk::TreeIter) -> Option<Self>
     where
         S: TreeModelExt,
