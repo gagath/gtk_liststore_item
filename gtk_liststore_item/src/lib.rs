@@ -5,29 +5,7 @@
 //! ```
 //! use gtk::prelude::*;
 //!
-//! use gladis::Gladis;
 //! use gtk_liststore_item::ListStoreItem;
-//!
-//! const GLADE_SRC: &str = r#"
-//! <?xml version="1.0" encoding="UTF-8"?>
-//! <!-- Generated with glade 3.22.2 -->
-//! <interface>
-//!   <requires lib="gtk+" version="3.20"/>
-//!   <object class="GtkListStore" id="list_store">
-//!     <columns>
-//!       <!-- column-name name -->
-//!       <column type="gchararray"/>
-//!       <!-- column-name value -->
-//!       <column type="guint"/>
-//!     </columns>
-//!   </object>
-//! </interface>
-//! "#;
-//!
-//! #[derive(Gladis)]
-//! struct Glade {
-//!     list_store: gtk::ListStore,
-//! }
 //!
 //! #[derive(ListStoreItem)]
 //! struct Item {
@@ -38,12 +16,12 @@
 //! fn main() {
 //!     gtk::init().unwrap();
 //!
-//!     let mut glade = Glade::from_string(GLADE_SRC).unwrap();
+//!     let mut list_store = Item::new_liststore();
 //!
 //!     let item = Item { name: "foobar".into(), value: 42 };
-//!     let iter = item.insert_into_liststore(&mut glade.list_store);
+//!     let iter = item.insert_into_liststore(&mut list_store);
 //!
-//!     let retrieved_item = Item::from_liststore_iter(&glade.list_store, &iter).unwrap();
+//!     let retrieved_item = Item::from_liststore_iter(&list_store, &iter).unwrap();
 //!     assert_eq!("foobar", retrieved_item.name);
 //!     assert_eq!(42, retrieved_item.value);
 //! }
