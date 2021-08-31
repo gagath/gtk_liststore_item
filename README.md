@@ -51,7 +51,10 @@ for i in 0..10 {
 
 And directly see the result inside a `GtkTreeView` widget:
 
-![Example screenshot with a table containing multiple entries](docs/gtk_liststore_example_simple.png)
+<p align="center">
+  <img alt="Example screenshot with a table containing multiple entries"
+src="docs/gtk_liststore_example_simple.png">
+</p>
 
 Without this crate, you would have to manually serialize each of the entries in
 your struct with their type and position:
