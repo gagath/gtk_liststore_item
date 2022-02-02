@@ -12,7 +12,6 @@ use gladis::Gladis;
 struct Ui {
     window: gtk::Window,
     list_store: gtk::ListStore,
-    tree_view: gtk::TreeView,
 }
 
 #[derive(ListStoreItem)]
