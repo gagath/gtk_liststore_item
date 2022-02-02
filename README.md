@@ -10,6 +10,7 @@ SPDX-License-Identifier: Apache-2.0 OR MIT
 [![Latest version](https://img.shields.io/crates/v/gtk_liststore_item.svg)](https://crates.io/crates/gtk_liststore_item)
 [![Documentation](https://docs.rs/gtk_liststore_item/badge.svg)](https://docs.rs/gtk_liststore_item)
 [![License](https://img.shields.io/crates/l/gtk_liststore_item.svg)](https://crates.io/crates/gtk_liststore_item)
+[![REUSE status](https://api.reuse.software/badge/github.com/MicroJoe/gtk_liststore_item)](https://api.reuse.software/info/github.com/MicroJoe/gtk_liststore_item)
 
 Automatic `gtk::ListStore` struct derive for Rust.
 
