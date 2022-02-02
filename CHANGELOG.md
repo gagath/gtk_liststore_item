@@ -12,6 +12,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.3] - 2021-08-31
+### Added
+ - Make project REUSE compliant.
+ - Add CHANGELOG symlinks in crates.
+
+### Changed
+ - Update author name.
+ - Renamed `master` branch to `main`.
+
+### Removed
+ - Remove unused field in examples.
+ - Remove useless carrets in Cargo.toml.
+
 ## [1.1.2] - 2021-08-31
 ### Changed
  - README: center screenshot
