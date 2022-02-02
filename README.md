@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2022 Agathe Porte <microjoe@microjoe.org>
+
+SPDX-License-Identifier: Apache-2.0 OR MIT
+-->
+
 # gtk_liststore_item
 
 [![Build](https://github.com/MicroJoe/gtk_liststore_item/actions/workflows/ci.yml/badge.svg)](https://github.com/MicroJoe/gtk_liststore_item/actions/workflows/ci.yml)
