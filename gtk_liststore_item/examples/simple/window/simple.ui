@@ -6,7 +6,6 @@ SPDX-FileCopyrightText: 2022 Agathe Porte <microjoe@microjoe.org>
 SPDX-License-Identifier: Apache-2.0 OR MIT
 -->
 
-<!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
   <object class="GtkListStore" id="list_store">
@@ -21,7 +20,7 @@ SPDX-License-Identifier: Apache-2.0 OR MIT
       <column type="gboolean"/>
     </columns>
   </object>
-  <object class="GtkApplicationWindow" id="window">
+  <template class="MyGtkAppWindow" parent="GtkApplicationWindow">
     <property name="can-focus">False</property>
     <property name="title">gtk_liststore_item simple example</property>
     <property name="default-width">440</property>
@@ -85,5 +84,5 @@ SPDX-License-Identifier: Apache-2.0 OR MIT
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>
