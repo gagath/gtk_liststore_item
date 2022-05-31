@@ -21,7 +21,7 @@ your project's `Cargo.toml` file:
 
 ```toml
 [dependencies]
-gtk_liststore_item = "^1.1"
+gtk_liststore_item = "1.2.0"
 ```
 
 ## Example
