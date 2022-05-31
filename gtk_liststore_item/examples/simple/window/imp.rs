@@ -6,7 +6,6 @@ use gtk::glib;
 use gtk::subclass::prelude::*;
 use gtk::{prelude::*, CompositeTemplate};
 
-
 #[derive(CompositeTemplate, Default)]
 #[template(file = "simple.ui")]
 pub struct Window {

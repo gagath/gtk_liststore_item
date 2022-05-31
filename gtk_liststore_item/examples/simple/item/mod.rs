@@ -2,9 +2,9 @@
 //
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-use gtk_liststore_item::ListStoreItem;
-use gtk::traits::TreeModelExt;
 use gtk::prelude::*;
+use gtk::traits::TreeModelExt;
+use gtk_liststore_item::ListStoreItem;
 
 #[derive(ListStoreItem)]
 pub struct Item {

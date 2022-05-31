@@ -35,6 +35,5 @@ impl Window {
             };
             item.insert_into_liststore(&mut self_.list_store.get());
         }
-
     }
 }

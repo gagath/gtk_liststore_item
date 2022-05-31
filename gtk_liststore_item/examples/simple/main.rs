@@ -7,7 +7,6 @@ use gtk::prelude::*;
 mod item;
 mod window;
 
-
 fn build_ui(app: &gtk::Application) {
     let window = window::Window::new(app);
     window.present();
